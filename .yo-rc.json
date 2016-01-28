@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "iFootball",
+    "packageName": "com.mobica.ifootball",
+    "packageFolder": "com/mobica/ifootball",
+    "authenticationType": "session",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "no",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": true,
+    "enableSocialSignIn": true,
+    "rememberMeKey": "0be48b5cea4af01dfa3d34301fef77dddc8af374",
+    "testFrameworks": [
+      "protractor"
+    ]
+  }
+}
