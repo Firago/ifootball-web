@@ -33,7 +33,6 @@ public class JHipsterProperties {
 
     private final CorsConfiguration cors = new CorsConfiguration();
 
-    private final Social social = new Social();
 
 
     public Async getAsync() {
@@ -72,9 +71,6 @@ public class JHipsterProperties {
         return cors;
     }
 
-    public Social getSocial() {
-        return social;
-    }
 
     public static class Async {
 
@@ -204,10 +200,47 @@ public class JHipsterProperties {
 
         private final Rememberme rememberme = new Rememberme();
 
+        private final Authentication authentication = new Authentication();
+
         public Rememberme getRememberme() {
             return rememberme;
         }
 
+        public Authentication getAuthentication() {
+            return authentication;
+        }
+
+        public static class Authentication {
+
+            private final Xauth xauth = new Xauth();
+
+            public Xauth getXauth() {
+                return xauth;
+            }
+
+            public static class Xauth {
+
+                private String secret;
+
+                private int tokenValidityInSeconds = 1800;
+
+                public String getSecret() {
+                    return secret;
+                }
+
+                public void setSecret(String secret) {
+                    this.secret = secret;
+                }
+
+                public int getTokenValidityInSeconds() {
+                    return tokenValidityInSeconds;
+                }
+
+                public void setTokenValidityInSeconds(int tokenValidityInSeconds) {
+                    this.tokenValidityInSeconds = tokenValidityInSeconds;
+                }
+            }
+        }
         public static class Rememberme {
 
             @NotNull
@@ -405,15 +438,4 @@ public class JHipsterProperties {
             }
         }
     }
-    public static class Social {
-
-        private String redirectAfterSignIn = "/#/home";
-
-        public String getRedirectAfterSignIn() {
-            return redirectAfterSignIn;
-        }
-
-        public void setRedirectAfterSignIn(String redirectAfterSignIn) {
-            this.redirectAfterSignIn = redirectAfterSignIn;
-        }
-    }}
+}

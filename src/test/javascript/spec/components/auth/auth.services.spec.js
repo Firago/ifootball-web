@@ -1,7 +1,6 @@
 'use strict';
 
 describe('Service Tests', function () {
-    beforeEach(mockApiAccountCall);
     beforeEach(mockI18nCalls);
     beforeEach(mockScriptsCalls);
 
@@ -14,7 +13,6 @@ describe('Service Tests', function () {
             authService = Auth;
             spiedAuthServerProvider = AuthServerProvider;
 
-            $httpBackend.expectPOST(/api\/logout\?cacheBuster=\d+/).respond(200, '');
         }));
         //make sure no expectations were missed in your tests.
         //(e.g. expectGET or expectPOST)
@@ -23,10 +21,9 @@ describe('Service Tests', function () {
             $httpBackend.verifyNoOutstandingRequest();
         });
         
-        it('should call backend on logout then call authServerProvider.logout', function(){
+          it('should call LocalStorageService.clearAll on logout', function(){
             //GIVEN
             //Set spy
-            spyOn(spiedAuthServerProvider, 'logout').and.callThrough();
             spyOn(spiedLocalStorageService, "clearAll").and.callThrough();
 
             //WHEN
@@ -35,9 +32,8 @@ describe('Service Tests', function () {
             $httpBackend.flush();
 
             //THEN
-            expect(spiedAuthServerProvider.logout).toHaveBeenCalled();
             expect(spiedLocalStorageService.clearAll).toHaveBeenCalled();
-        });
+          });
 
     });
 });

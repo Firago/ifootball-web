@@ -24,23 +24,6 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
-    social:
-        # see https://developers.google.com/+/web/signin/server-side-flow#step_1_create_a_client_id_and_client_secret
-        google:
-            clientId: 802756987448-749re1p8krodjek4ga1kmi5b92qhnpll.apps.googleusercontent.com
-            clientSecret: nt__9QH2b3UnJTI-Wm6Fwou9
-
-        # see https://developers.facebook.com/docs/facebook-login/v2.2
-        facebook:
-            clientId: xxx
-            clientSecret: xxx
-
-        # see https://apps.twitter.com/app/
-        twitter:
-            clientId: xxx
-            clientSecret: xxx
-
-        # jhipster-needle-add-social-configuration
 
 security:
     basic:
@@ -65,9 +48,14 @@ jhipster:
     mail:
         from: iFootball@localhost
     security:
+        authentication:
+            xauth:
+                secret: myXAuthSecret
+                # Token is valid 30 minutes
+                tokenValidityInSeconds: 1800
         rememberme:
             # security key (this key should be unique for your application, and kept secret)
-            key: 0be48b5cea4af01dfa3d34301fef77dddc8af374
+            key: fc3d74bb041da7ec30a3aa404ff4cd4392459c3b
     swagger:
         title: iFootball API
         description: iFootball API documentation
@@ -76,5 +64,3 @@ jhipster:
         contact:
         license:
         licenseUrl:
-    social:
-        redirectAfterSignIn: "/#/home"

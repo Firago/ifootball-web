@@ -24,8 +24,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 1, max = 100)
-    @Column(length = 100, unique = true, nullable = false)
+    @Pattern(regexp = "^[a-z0-9]*$|(anonymousUser)")
+    @Size(min = 1, max = 50)
+    @Column(length = 50, unique = true, nullable = false)
     private String login;
 
     @JsonIgnore
@@ -73,10 +74,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     private Set<Authority> authorities = new HashSet<>();
-
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
-    private Set<PersistentToken> persistentTokens = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -172,14 +169,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
-    }
-
-    public Set<PersistentToken> getPersistentTokens() {
-        return persistentTokens;
-    }
-
-    public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
-        this.persistentTokens = persistentTokens;
     }
 
     @Override

@@ -3,7 +3,7 @@
     "baseName": "iFootball",
     "packageName": "com.mobica.ifootball",
     "packageFolder": "com/mobica/ifootball",
-    "authenticationType": "session",
+    "authenticationType": "xauth",
     "hibernateCache": "no",
     "clusteredHttpSession": "no",
     "websocket": "spring-websocket",
@@ -15,8 +15,8 @@
     "buildTool": "maven",
     "frontendBuilder": "grunt",
     "enableTranslation": true,
-    "enableSocialSignIn": true,
-    "rememberMeKey": "0be48b5cea4af01dfa3d34301fef77dddc8af374",
+    "enableSocialSignIn": false,
+    "rememberMeKey": "fc3d74bb041da7ec30a3aa404ff4cd4392459c3b",
     "testFrameworks": [
       "protractor"
     ]
