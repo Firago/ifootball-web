@@ -23,6 +23,7 @@ angular.module('ifootballApp')
                 var socket = new SockJS(url);
                 stompClient = Stomp.over(socket);
                 var headers = {};
+                headers['X-CSRF-TOKEN'] = $cookies[$http.defaults.xsrfCookieName];
                 stompClient.connect(headers, function(frame) {
                     connected.resolve("success");
                     sendActivity();

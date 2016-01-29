@@ -68,11 +68,10 @@
 
             function addApiKeyAuthorization(){
             
-            
-            
-                var authToken = JSON.parse(localStorage.getItem("ls.token")).token;
-                var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("X-Auth-Token", authToken, "header");
+                var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("X-CSRF-TOKEN", getCSRF(), "header");
                 window.swaggerUi.api.clientAuthorizations.add("key", apiKeyAuth);
+            
+            
             
             }
 
