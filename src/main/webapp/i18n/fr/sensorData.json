@@ -1,0 +1,24 @@
+{
+    "ifootballApp": {
+        "sensorData" : {
+            "home": {
+                "title": "SensorDatas",
+                "createLabel": "Créer un nouveau SensorData",
+                "createOrEditLabel": "Créer ou éditer un SensorData",
+                "search": "Search for SensorData"
+            },
+            "created": "Un nouveau SensorData a été créé avec l'identifiant {{ param }}",
+            "updated": "Le SensorData avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le SensorData avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le SensorData {{ id }} ?"
+            },
+            "detail": {
+                "title": "SensorData"
+            },
+            "time": "Time",
+            "value": "Value"
+        }
+    }
+}
+

@@ -1,0 +1,38 @@
+
+<div>
+    <h2><span translate="ifootballApp.statusHistory.detail.title">StatusHistory</span> {{statusHistory.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="ifootballApp.statusHistory.time">Time</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{statusHistory.time | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="ifootballApp.statusHistory.status">Status</span>
+                </td>
+                <td>
+                    <span class="form-control-static" translate="{{'ifootballApp.Status.' + statusHistory.status}}">{{statusHistory.status}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

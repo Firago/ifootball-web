@@ -1,0 +1,23 @@
+{
+    "ifootballApp": {
+        "statusHistory" : {
+            "home": {
+                "title": "StatusHistorys",
+                "createLabel": "Create a new StatusHistory",
+                "createOrEditLabel": "Create or edit a StatusHistory",
+                "search": "Search for StatusHistory"
+            },
+            "created": "A new StatusHistory is created with identifier {{ param }}",
+            "updated": "A StatusHistory is updated with identifier {{ param }}",
+            "deleted": "A StatusHistory is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete StatusHistory {{ id }}?"
+            },
+            "detail": {
+                "title": "StatusHistory"
+            },
+            "time": "Time",
+            "status": "Status"
+        }
+    }
+}
