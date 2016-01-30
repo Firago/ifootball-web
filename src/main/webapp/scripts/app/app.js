@@ -122,6 +122,10 @@ angular.module('ifootballApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasc
         tmhDynamicLocaleProvider.storageKey('NG_TRANSLATE_LANG_KEY');
         
     })
+    // Initialize material design
+    .config(function () {
+        $.material.init();
+    })
     // jhipster-needle-angularjs-add-config JHipster will add new application configuration here
     .config(['$urlMatcherFactoryProvider', function($urlMatcherFactory) {
         $urlMatcherFactory.type('boolean', {
