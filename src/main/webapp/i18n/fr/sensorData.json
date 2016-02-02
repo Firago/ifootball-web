@@ -2,7 +2,7 @@
     "ifootballApp": {
         "sensorData" : {
             "home": {
-                "title": "SensorDatas",
+                "title": "SensorData",
                 "createLabel": "Créer un nouveau SensorData",
                 "createOrEditLabel": "Créer ou éditer un SensorData",
                 "search": "Search for SensorData"

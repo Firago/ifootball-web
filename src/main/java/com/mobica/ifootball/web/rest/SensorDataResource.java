@@ -6,7 +6,6 @@ import com.mobica.ifootball.repository.SensorDataRepository;
 import com.mobica.ifootball.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +26,14 @@ import java.util.Optional;
 public class SensorDataResource {
 
     private final Logger log = LoggerFactory.getLogger(SensorDataResource.class);
-        
+
     @Inject
     private SensorDataRepository sensorDataRepository;
-    
+
     /**
-     * POST  /sensorDatas -> Create a new sensorData.
+     * POST  /sensorData -> Create a new sensorData.
      */
-    @RequestMapping(value = "/sensorDatas",
+    @RequestMapping(value = "/sensorData",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -44,15 +43,15 @@ public class SensorDataResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("sensorData", "idexists", "A new sensorData cannot already have an ID")).body(null);
         }
         SensorData result = sensorDataRepository.save(sensorData);
-        return ResponseEntity.created(new URI("/api/sensorDatas/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/sensorData/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("sensorData", result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /sensorDatas -> Updates an existing sensorData.
+     * PUT  /sensorData -> Updates an existing sensorData.
      */
-    @RequestMapping(value = "/sensorDatas",
+    @RequestMapping(value = "/sensorData",
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -68,21 +67,21 @@ public class SensorDataResource {
     }
 
     /**
-     * GET  /sensorDatas -> get all the sensorDatas.
+     * GET  /sensorData -> get all the sensorData.
      */
-    @RequestMapping(value = "/sensorDatas",
+    @RequestMapping(value = "/sensorData",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<SensorData> getAllSensorDatas() {
-        log.debug("REST request to get all SensorDatas");
+    public List<SensorData> getAllSensorData() {
+        log.debug("REST request to get all SensorData");
         return sensorDataRepository.findAll();
             }
 
     /**
-     * GET  /sensorDatas/:id -> get the "id" sensorData.
+     * GET  /sensorData/:id -> get the "id" sensorData.
      */
-    @RequestMapping(value = "/sensorDatas/{id}",
+    @RequestMapping(value = "/sensorData/{id}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -97,9 +96,9 @@ public class SensorDataResource {
     }
 
     /**
-     * DELETE  /sensorDatas/:id -> delete the "id" sensorData.
+     * DELETE  /sensorData/:id -> delete the "id" sensorData.
      */
-    @RequestMapping(value = "/sensorDatas/{id}",
+    @RequestMapping(value = "/sensorData/{id}",
         method = RequestMethod.DELETE,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed

@@ -39,6 +39,8 @@ module.exports = function (config) {
             'main/webapp/bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
             'main/webapp/bower_components/bootstrap-material-design/dist/js/material.js',
             'main/webapp/bower_components/bootstrap-material-design/dist/js/ripples.js',
+            'main/webapp/bower_components/Chart.js/Chart.js',
+            'main/webapp/bower_components/angular-chart.js/dist/angular-chart.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',
