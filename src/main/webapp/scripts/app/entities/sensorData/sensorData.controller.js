@@ -4,15 +4,15 @@ angular.module('ifootballApp')
     .controller('SensorDataController', function ($scope, $state, $interval, SensorData, DateUtils) {
 
         var maxElements = 300;
-        var labelsInterval = maxElements / 10;
+        var labelsInterval = maxElements / 5;
         var firstLabelExists = false;
         var emptyLabel = '';
         $scope.data = [[]];
         $scope.labels = [];
         $scope.options = {
             animation: false,
-            showScale: false,
-            //scaleShowGridLines: false,
+            //showScale: false,
+            scaleShowGridLines: false,
             showTooltips: false,
             pointDot: false,
             datasetStrokeWidth: 0.5

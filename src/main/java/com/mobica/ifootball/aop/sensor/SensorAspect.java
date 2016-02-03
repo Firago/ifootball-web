@@ -29,10 +29,7 @@ public class SensorAspect {
 
     @Before("updateChartPointcut()")
     public void updateChartAround(JoinPoint joinPoint) throws Throwable {
-        if (log.isDebugEnabled()) {
-            log.debug("Enter: {}.{}() with argument[s] = {}", joinPoint.getSignature().getDeclaringTypeName(),
-                joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
-        }
+        log.debug("Enter: {}.{}() with argument[s] = {}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
         Object[] args = joinPoint.getArgs();
         sensorDataService.updateChart((SensorData) args[0]);
     }

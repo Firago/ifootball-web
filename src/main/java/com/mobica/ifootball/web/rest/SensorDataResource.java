@@ -33,6 +33,7 @@ public class SensorDataResource {
     /**
      * POST  /sensorData -> Create a new sensorData.
      */
+    @CrossOrigin
     @RequestMapping(value = "/sensorData",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -76,7 +77,7 @@ public class SensorDataResource {
     public List<SensorData> getAllSensorData() {
         log.debug("REST request to get all SensorData");
         return sensorDataRepository.findAll();
-            }
+    }
 
     /**
      * GET  /sensorData/:id -> get the "id" sensorData.

@@ -33,10 +33,7 @@ angular.module('ifootballApp')
         }
 
         this.timeFormat = function (date) {
-            var hours = date.getHours();
-            var minutes = date.getMinutes();
-            var seconds = date.getSeconds();
-            return hours + ':' + minutes + ':' + seconds;
+            return date.toLocaleTimeString('pl-PL', {hour12: false});
         }
 
     });
