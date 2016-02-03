@@ -1,8 +1,13 @@
 package com.mobica.ifootball.aop.sensor;
 
 import com.mobica.ifootball.domain.SensorData;
+import com.mobica.ifootball.domain.StatusHistory;
+import com.mobica.ifootball.domain.enumeration.Status;
+import com.mobica.ifootball.repository.SensorDataRepository;
+import com.mobica.ifootball.repository.StatusHistoryRepository;
 import com.mobica.ifootball.web.websocket.SensorDataService;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -10,7 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by dmfi on 01/02/2016.
@@ -33,4 +40,5 @@ public class SensorAspect {
         Object[] args = joinPoint.getArgs();
         sensorDataService.updateChart((SensorData) args[0]);
     }
+
 }

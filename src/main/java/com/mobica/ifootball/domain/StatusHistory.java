@@ -1,13 +1,12 @@
 package com.mobica.ifootball.domain;
 
-import java.time.ZonedDateTime;
+import com.mobica.ifootball.domain.enumeration.Status;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
-
-import com.mobica.ifootball.domain.enumeration.Status;
 
 /**
  * A StatusHistory.
@@ -23,12 +22,21 @@ public class StatusHistory implements Serializable {
     @NotNull
     @Column(name = "time", nullable = false)
     private ZonedDateTime time;
-    
+
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
-    
+
+    public StatusHistory() {
+        
+    }
+
+    public StatusHistory(ZonedDateTime time, Status status) {
+        this.time = time;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
@@ -40,7 +48,7 @@ public class StatusHistory implements Serializable {
     public ZonedDateTime getTime() {
         return time;
     }
-    
+
     public void setTime(ZonedDateTime time) {
         this.time = time;
     }
@@ -48,7 +56,7 @@ public class StatusHistory implements Serializable {
     public Status getStatus() {
         return status;
     }
-    
+
     public void setStatus(Status status) {
         this.status = status;
     }
@@ -62,7 +70,7 @@ public class StatusHistory implements Serializable {
             return false;
         }
         StatusHistory statusHistory = (StatusHistory) o;
-        if(statusHistory.id == null || id == null) {
+        if (statusHistory.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, statusHistory.id);

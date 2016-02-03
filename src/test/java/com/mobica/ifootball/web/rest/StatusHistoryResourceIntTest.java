@@ -52,9 +52,9 @@ public class StatusHistoryResourceIntTest {
     private static final ZonedDateTime DEFAULT_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_TIME_STR = dateTimeFormatter.format(DEFAULT_TIME);
-    
-    private static final Status DEFAULT_STATUS = Status.free;
-    private static final Status UPDATED_STATUS = Status.occupied;
+
+    private static final Status DEFAULT_STATUS = Status.FREE;
+    private static final Status UPDATED_STATUS = Status.OCCUPIED;
 
     @Inject
     private StatusHistoryRepository statusHistoryRepository;
