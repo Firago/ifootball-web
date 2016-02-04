@@ -54,8 +54,8 @@ angular.module('ifootballApp')
             $scope.lastStatus = LastStatusHistory.get();
         }
 
-        $scope.$on('autoupdate', function() {
-            if ($scope.autoupdate) {
+        $scope.$watch('autoupdate', function(newValue, oldValue) {
+            if (newValue) {
                 StatusHistoryWebSocket.connect();
                 StatusHistoryWebSocket.subscribe();
             } else {
