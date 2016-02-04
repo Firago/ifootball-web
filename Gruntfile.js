@@ -161,7 +161,7 @@ module.exports = function (grunt) {
         },
         usemin: {
             html: ['<%= yeoman.dist %>/**/*.html'],
-            css: ['<%= yeoman.dist %>/assets/styles/**/*.css'],
+            css: ['<%= yeoman.dist %>/assets/styles/**/*.css', 'https://fonts.googleapis.com/icon?family=Material+Icons>'],
             js: ['<%= yeoman.dist %>/scripts/**/*.js'],
             options: {
                 assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/assets/styles', '<%= yeoman.dist %>/assets/images', '<%= yeoman.dist %>/assets/fonts'],

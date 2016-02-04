@@ -41,6 +41,12 @@ module.exports = function (config) {
             'main/webapp/bower_components/bootstrap-material-design/dist/js/ripples.js',
             'main/webapp/bower_components/Chart.js/Chart.js',
             'main/webapp/bower_components/angular-chart.js/dist/angular-chart.js',
+            'main/webapp/bower_components/HTML5-Desktop-Notifications2/desktop-notify.js',
+            'main/webapp/bower_components/angular-web-notification/angular-web-notification.js',
+            'main/webapp/bower_components/moment/moment.js',
+            'main/webapp/bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js',
+            'main/webapp/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+            'main/webapp/bower_components/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',
@@ -62,12 +68,12 @@ module.exports = function (config) {
         reporters: ['dots', 'jenkins', 'coverage', 'progress'],
 
         jenkinsReporter: {
-            
+
             outputFile: '../target/test-results/karma/TESTS-results.xml'
         },
 
         coverageReporter: {
-            
+
             dir: '../target/test-results/coverage',
             reporters: [
                 {type: 'lcov', subdir: 'report-lcov'}

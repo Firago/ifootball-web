@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
     <div class="modal-header">
@@ -15,11 +14,18 @@
         </div>
         <div class="form-group">
             <label class="control-label" translate="ifootballApp.statusHistory.time" for="field_time">Time</label>
-            <input id="field_time" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="statusHistory.time" is-open="datePickerForTime.status.opened"
-            required/>
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="datePickerForTimeOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
+            <!--<input id="field_time" type="text" class="form-control" uib-datepicker-popup="{{dateformat}}" ng-model="statusHistory.time" is-open="datePickerForTime.status.opened"-->
+            <!--required/>-->
+            <input id="field_time" type="text" class="form-control input-sm"
+                   datetimepicker
+                   datetimepicker-options="{{ datetimepicker_options }}"
+                   placeholder=""
+                   name="time"
+                   ng-model="statusHistory.time"
+                   required>
+            <!--<span class="input-group-btn">-->
+                <!--<button type="button" class="btn btn-default" ng-click="datePickerForTimeOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
+            <!--</span>-->
             <div ng-show="editForm.time.$invalid">
                 <p class="help-block"
                     ng-show="editForm.time.$error.required" translate="entity.validation.required">

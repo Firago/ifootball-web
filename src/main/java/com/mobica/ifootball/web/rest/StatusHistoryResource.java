@@ -6,6 +6,7 @@ import com.mobica.ifootball.repository.StatusHistoryRepository;
 import com.mobica.ifootball.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,10 +28,10 @@ import java.util.Optional;
 public class StatusHistoryResource {
 
     private final Logger log = LoggerFactory.getLogger(StatusHistoryResource.class);
-        
+
     @Inject
     private StatusHistoryRepository statusHistoryRepository;
-    
+
     /**
      * POST  /statusHistorys -> Create a new statusHistory.
      */
@@ -89,6 +90,27 @@ public class StatusHistoryResource {
     public ResponseEntity<StatusHistory> getStatusHistory(@PathVariable Long id) {
         log.debug("REST request to get StatusHistory : {}", id);
         StatusHistory statusHistory = statusHistoryRepository.findOne(id);
+        return Optional.ofNullable(statusHistory)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * GET  /statusHistorys/last -> get the last statusHistory.
+     */
+    @RequestMapping(value = "/statusHistorys/last",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<StatusHistory> getLastStatusHistory() {
+        log.debug("REST request to get last StatusHistory");
+        List<StatusHistory> lastList = statusHistoryRepository.findAll(new Sort(Sort.Direction.DESC, "time"));
+        StatusHistory statusHistory = null;
+        if (lastList.size() > 0) {
+            statusHistory = lastList.get(0);
+        }
         return Optional.ofNullable(statusHistory)
             .map(result -> new ResponseEntity<>(
                 result,
