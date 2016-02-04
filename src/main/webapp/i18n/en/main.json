@@ -1,19 +1,27 @@
 {
     "main": {
-        "title": "Welcome, Java Hipster!",
-        "subtitle": "This is your homepage",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
-        "question": "If you have any question on JHipster:",
-        "link": {
-            "homepage": "JHipster homepage",
-            "stackoverflow": "JHipster on Stack Overflow",
-            "bugtracker": "JHipster bug tracker",
-            "chat": "JHipster public chat room",
-            "contact": "contact @java_hipster on Twitter"
+        "message": "Table is <span class=\"{{css}}\">{{status}}</span> for {{time}}",
+        "info": {
+            "free": "Have fun !!!",
+            "occupied": "Back to work !!!",
+            "unavailable": "Sorry !!!"
         },
-        "like": "If you like JHipster, don't forget to give us a star on",
-        "github": "Github"
+        "autoupdate" : {
+            "button": "Refresh",
+            "label": "Status autoupdate",
+            "on": "Status will be updated automatically",
+            "off": "For status update press \"Refresh\" button"
+        },
+        "notify" : {
+            "button": "Test",
+            "label": "Notifications",
+            "on": "Notifications are turned on. You will notify when table status will change.",
+            "off": "Notifications are turned off. You will not notify on status change"
+        },
+        "refresh": "Refresh",
+        "noservice": "Service is temporarily unavailable."
     }
 }

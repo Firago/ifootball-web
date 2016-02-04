@@ -4,6 +4,8 @@ angular.module('ifootballApp').controller('StatusHistoryDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'StatusHistory',
         function($scope, $stateParams, $uibModalInstance, entity, StatusHistory) {
 
+        $scope.datetimepicker_options = { format : moment().format() }
+
         $scope.statusHistory = entity;
         $scope.load = function(id) {
             StatusHistory.get({id : id}, function(result) {

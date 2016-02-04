@@ -19,6 +19,9 @@ angular.module('ifootballApp')
                     mainTranslatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                         $translatePartialLoader.addPart('main');
                         return $translate.refresh();
+                    }],
+                    lastStatus: ['$stateParams', 'LastStatusHistory', function($stateParams, LastStatusHistory) {
+                        return LastStatusHistory.get();
                     }]
                 }
             });

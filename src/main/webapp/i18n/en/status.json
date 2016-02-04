@@ -2,9 +2,9 @@
     "ifootballApp": {
         "Status" : {
             "null": "",
-            "free": "free",
-            "occupied": "occupied",
-            "unavailable": "unavailable"
+            "free": "FREE",
+            "occupied": "OCCUPIED",
+            "unavailable": "UNAVAILABLE"
         }
     }
 }
