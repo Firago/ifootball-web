@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ifootballApp')
-    .controller('MainController', function ($scope, Principal, lastStatus, webNotification, LastStatusHistory) {
+    .controller('MainController', function ($scope, Principal, lastStatus, webNotification, LastStatusHistory, StatusHistoryWebSocket) {
 
         $scope.autoupdate = false;
         $scope.notify = false;
@@ -49,7 +49,22 @@ angular.module('ifootballApp')
                 }
             });
         }
+
         $scope.refresh = function() {
             $scope.lastStatus = LastStatusHistory.get();
         }
+
+        $scope.$on('autoupdate', function() {
+            if ($scope.autoupdate) {
+                StatusHistoryWebSocket.connect();
+                StatusHistoryWebSocket.subscribe();
+            } else {
+                StatusHistoryWebSocket.unsubscribe();
+                StatusHistoryWebSocket.disconnect();
+            }
+        })
+
+        StatusHistoryWebSocket.receive().then(null, null, function (data) {
+            $scope.lastStatus = data;
+        });
     });
