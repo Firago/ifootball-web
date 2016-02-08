@@ -7,7 +7,6 @@ import com.mobica.ifootball.repository.SensorDataRepository;
 import com.mobica.ifootball.repository.StatusHistoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,8 +25,6 @@ public class StatusUpdateService {
     private SensorDataRepository sensorDataRepository;
     @Inject
     private StatusHistoryRepository statusHistoryRepository;
-    @Inject
-    private SimpMessageSendingOperations messagingTemplate;
 
     @Scheduled(fixedRate = 5000)
     public void updateStatus() {
@@ -66,7 +63,6 @@ public class StatusUpdateService {
         log.info("Changing status to {}", status);
         StatusHistory statusHistory = new StatusHistory(time, status);
         statusHistoryRepository.saveAndFlush(statusHistory);
-        messagingTemplate.convertAndSend("/table/status", statusHistory);
     }
 
 }
