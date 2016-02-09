@@ -6,7 +6,6 @@ angular.module('ifootballApp')
         $scope.autoupdate = false;
         $scope.notify = false;
 
-        $scope.lastStatus = lastStatus;
         $scope.setCss = function (scope) {
             if (scope.lastStatus.status == "FREE") {
                 scope.css = "text-success";
@@ -18,7 +17,6 @@ angular.module('ifootballApp')
                 scope.css = "text-warning";
             }
         }
-        $scope.setCss($scope);
 
         $scope.getTime = function() {
             return moment($scope.lastStatus.time).fromNow(true);
@@ -50,21 +48,28 @@ angular.module('ifootballApp')
             });
         }
 
+        var updateStatus = function (data) {
+            $scope.lastStatus = data;
+            $scope.setCss($scope);
+            if ($scope.notify) {
+                $scope.notificationTest();
+            }
+        }
+
         $scope.refresh = function() {
-            $scope.lastStatus = LastStatusHistory.get();
+            updateStatus(LastStatusHistory.get());
         }
 
         $scope.$watch('autoupdate', function(newValue, oldValue) {
             if (newValue) {
                 StatusHistoryWebSocket.connect();
                 StatusHistoryWebSocket.subscribe();
+                StatusHistoryWebSocket.receive().then(null, null, updateStatus);
             } else {
                 StatusHistoryWebSocket.unsubscribe();
                 StatusHistoryWebSocket.disconnect();
             }
         })
 
-        StatusHistoryWebSocket.receive().then(null, null, function (data) {
-            $scope.lastStatus = data;
-        });
+        updateStatus(lastStatus);
     });
