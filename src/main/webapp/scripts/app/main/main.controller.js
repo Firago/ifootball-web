@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ifootballApp')
-    .controller('MainController', function ($scope, Principal, lastStatus, webNotification, LastStatusHistory, StatusHistoryWebSocket) {
+    .controller('MainController', function ($scope, Principal, lastStatus, webNotification, StatusHistory, StatusHistoryWebSocket) {
 
         $scope.autoupdate = false;
         $scope.notify = false;
@@ -57,7 +57,7 @@ angular.module('ifootballApp')
         }
 
         $scope.refresh = function() {
-            updateStatus(LastStatusHistory.get());
+            updateStatus(StatusHistory.get({id: 0}));
         }
 
         $scope.$watch('autoupdate', function(newValue, oldValue) {
