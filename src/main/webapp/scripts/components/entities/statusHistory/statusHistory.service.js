@@ -15,18 +15,6 @@ angular.module('ifootballApp')
             'update': {method: 'PUT'}
         });
     })
-    .factory('LastStatusHistory', function ($resource, DateUtils) {
-        return $resource('api/statusHistorys/last', {}, {
-            'get': {
-                method: 'GET',
-                transformResponse: function (data) {
-                    data = angular.fromJson(data);
-                    data.time = DateUtils.convertDateTimeFromServer(data.time);
-                    return data;
-                }
-            }
-        });
-    })
     .factory('StatusHistoryWebSocket', function ($rootScope, $cookies, $http, $q) {
         var stompClient = null;
         var subscriber = null;

@@ -20,8 +20,8 @@ angular.module('ifootballApp')
                         $translatePartialLoader.addPart('main');
                         return $translate.refresh();
                     }],
-                    lastStatus: ['$stateParams', 'LastStatusHistory', function($stateParams, LastStatusHistory) {
-                        return LastStatusHistory.get();
+                    lastStatus: ['$stateParams', 'StatusHistory', function($stateParams, StatusHistory) {
+                        return StatusHistory.get({id: 0});
                     }]
                 }
             });
