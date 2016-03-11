@@ -1,0 +1,12 @@
+{
+    "ifootballApp": {
+        "ParameterType" : {
+            "null": "",
+            "STRING": "STRING",
+            "DECIMAL": "DECIMAL",
+            "FLOAT": "FLOAT",
+            "BOOLEAN": "BOOLEAN",
+            "DATE": "DATE"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "key",
+            "fieldType": "ParameterKey",
+            "fieldValues": "VIBRATION_AMPLITUDE_THRESHOLD, VIBRATION_COUNT_THRESHOLD, VIBRATION_ANALYSE_INTERVAL",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "type",
+            "fieldType": "ParameterType",
+            "fieldValues": "STRING, DECIMAL, FLOAT, BOOLEAN, DATE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "value",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160212142218",
+    "dto": "no",
+    "service": "no",
+    "pagination": "no"
+}

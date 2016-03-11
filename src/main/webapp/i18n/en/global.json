@@ -9,6 +9,7 @@
                 "main": "Entities",
                 "sensorData": "SensorData",
                 "statusHistory": "StatusHistory",
+                "parameter": "Parameter",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,8 +1,11 @@
 package com.mobica.ifootball.service;
 
+import com.mobica.ifootball.domain.Parameter;
 import com.mobica.ifootball.domain.SensorData;
 import com.mobica.ifootball.domain.StatusHistory;
+import com.mobica.ifootball.domain.enumeration.ParameterKey;
 import com.mobica.ifootball.domain.enumeration.Status;
+import com.mobica.ifootball.repository.ParameterRepository;
 import com.mobica.ifootball.repository.SensorDataRepository;
 import com.mobica.ifootball.repository.StatusHistoryRepository;
 import org.slf4j.Logger;
@@ -25,9 +28,16 @@ public class StatusUpdateService {
     private SensorDataRepository sensorDataRepository;
     @Inject
     private StatusHistoryRepository statusHistoryRepository;
+    @Inject
+    private ParameterRepository parameterRepository;
 
     @Scheduled(fixedRate = 5000)
     public void updateStatus() {
+
+        Parameter intervalParameter = parameterRepository.finByKey(ParameterKey.VIBRATION_ANALYSE_INTERVAL);
+        Integer interval = intervalParameter.getType().valueFromString(intervalParameter.getValue());
+
+
         List<StatusHistory> statusHistory = statusHistoryRepository.findTop1ByOrderByTimeDesc();
         StatusHistory entry = statusHistory.size() > 0 ? statusHistory.get(0) : null;
         Status currentStatus = entry == null ? null : entry.getStatus();
@@ -35,8 +45,8 @@ public class StatusUpdateService {
 
         ZonedDateTime now = ZonedDateTime.now();
 
-        List<SensorData> sensorDataList = sensorDataRepository.findWhereTimeGreaterThan(now.minusSeconds(10));
-        log.debug("Sensor data count during last 10 seconds - {}", sensorDataList.size());
+        List<SensorData> sensorDataList = sensorDataRepository.findWhereTimeGreaterThan(now.minusSeconds(interval));
+        log.debug("Sensor data count during last {} seconds - {}", interval, sensorDataList.size());
         if (sensorDataList.isEmpty() && !Status.UNAVAILABLE.equals(currentStatus)) {
             changeStatus(now, Status.UNAVAILABLE);
         } else {
@@ -45,16 +55,20 @@ public class StatusUpdateService {
     }
 
     private void analyseSensorData(Status currentStatus, ZonedDateTime now, List<SensorData> sensorDataList) {
+        Parameter amplitudeParameter = parameterRepository.finByKey(ParameterKey.VIBRATION_AMPLITUDE_THRESHOLD);
+        Float amplitude = amplitudeParameter.getType().valueFromString(amplitudeParameter.getValue());
+        Parameter countParameter = parameterRepository.finByKey(ParameterKey.VIBRATION_COUNT_THRESHOLD);
+        Integer count = countParameter.getType().valueFromString(countParameter.getValue());
         final int[] suspicions = {0};
-        sensorDataList.stream().filter(sensorData -> sensorData.getValue() > 0.2).forEach(sensorData -> {
+        sensorDataList.stream().filter(sensorData -> amplitude < sensorData.getValue()).forEach(sensorData -> {
             suspicions[0]++;
         });
         log.debug("Number of high amplitude vibrations - {}", suspicions[0]);
         double occupied = (suspicions[0] * 100.0) / sensorDataList.size();
         log.debug("Vibrations took {}% of time during last 10 seconds", occupied);
-        if (occupied > 20 && !Status.OCCUPIED.equals(currentStatus)) {
+        if (occupied > count && !Status.OCCUPIED.equals(currentStatus)) {
             changeStatus(now, Status.OCCUPIED);
-        } else if (occupied <= 20 && !Status.FREE.equals(currentStatus)) {
+        } else if (occupied <= count && !Status.FREE.equals(currentStatus)) {
             changeStatus(now, Status.FREE);
         }
     }
