@@ -1,6 +1,6 @@
 <div ng-cloak>
     <div class="container-fluid">
-        <div class="col-md-offset-4 col-md-4" ng-switch="lastStatus.status">
+        <div class="col-md-offset-2 col-md-8" ng-switch="lastStatus.status">
 
             <h1 translate="main.message" translate-values="{status: '{{lastStatus.status}}', time: getTime(), css: css}"></h1>
 
@@ -8,17 +8,12 @@
             <h2 ng-switch-when="OCCUPIED" translate="main.info.occupied"></h2>
             <h2 ng-switch-when="UNAVAILABLE" translate="main.info.unavailable"></h2>
 
-            <div class="alert alert-dismissible alert-warning" ng-switch-when="UNAVAILABLE">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4>Warning!</h4>
-                <p translate="main.noservice"></p>
-            </div>
         </div>
     </div>
     <hr/>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-offset-4 col-md-4" ng-switch="autoupdate">
+            <div class="col-md-offset-2 col-md-8" ng-switch="autoupdate">
                 <div class="togglebutton pull-left">
                     <label for="autoupdate">
                         <input id="autoupdate" type="checkbox" checked="" ng-model="autoupdate">
@@ -34,7 +29,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-offset-4 col-md-4">
+            <div class="col-md-offset-2 col-md-8">
                 <div class="togglebutton pull-left">
                     <label for="notify" ng-switch="notify">
                         <input id="notify" type="checkbox" checked="" ng-model="notify">
