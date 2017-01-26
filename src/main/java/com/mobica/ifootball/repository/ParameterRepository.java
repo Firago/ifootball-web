@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ParameterRepository extends JpaRepository<Parameter,Long> {
 
-    Parameter finByKey(ParameterKey key);
+    Parameter findByKey(ParameterKey key);
 }

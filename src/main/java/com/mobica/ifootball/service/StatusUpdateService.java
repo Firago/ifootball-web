@@ -10,7 +10,6 @@ import com.mobica.ifootball.repository.SensorDataRepository;
 import com.mobica.ifootball.repository.StatusHistoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,10 +30,10 @@ public class StatusUpdateService {
     @Inject
     private ParameterRepository parameterRepository;
 
-    @Scheduled(fixedRate = 5000)
+//    @Scheduled(fixedRate = 5000)
     public void updateStatus() {
 
-        Parameter intervalParameter = parameterRepository.finByKey(ParameterKey.VIBRATION_ANALYSE_INTERVAL);
+        Parameter intervalParameter = parameterRepository.findByKey(ParameterKey.VIBRATION_ANALYSE_INTERVAL);
         Integer interval = intervalParameter.getType().valueFromString(intervalParameter.getValue());
 
 
@@ -55,9 +54,9 @@ public class StatusUpdateService {
     }
 
     private void analyseSensorData(Status currentStatus, ZonedDateTime now, List<SensorData> sensorDataList) {
-        Parameter amplitudeParameter = parameterRepository.finByKey(ParameterKey.VIBRATION_AMPLITUDE_THRESHOLD);
+        Parameter amplitudeParameter = parameterRepository.findByKey(ParameterKey.VIBRATION_AMPLITUDE_THRESHOLD);
         Float amplitude = amplitudeParameter.getType().valueFromString(amplitudeParameter.getValue());
-        Parameter countParameter = parameterRepository.finByKey(ParameterKey.VIBRATION_COUNT_THRESHOLD);
+        Parameter countParameter = parameterRepository.findByKey(ParameterKey.VIBRATION_COUNT_THRESHOLD);
         Integer count = countParameter.getType().valueFromString(countParameter.getValue());
         final int[] suspicions = {0};
         sensorDataList.stream().filter(sensorData -> amplitude < sensorData.getValue()).forEach(sensorData -> {
