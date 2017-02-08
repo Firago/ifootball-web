@@ -1,0 +1,17 @@
+version: '2'
+services:
+    ifootball2-mongodb:
+        container_name: ifootball2-mongodb
+        image: mongo:3.3.12
+        ports:
+            - "27017:27017"
+        command: mongos --configdb ifootball2-mongodb-config
+    ifootball2-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    ifootball2-mongodb-config:
+        image: mongo:mongo:3.3.12
+        container_name: ifootball2-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db

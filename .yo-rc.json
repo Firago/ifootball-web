@@ -1,24 +1,33 @@
 {
   "generator-jhipster": {
-    "baseName": "iFootball",
-    "packageName": "com.mobica.ifootball",
-    "packageFolder": "com/mobica/ifootball",
-    "authenticationType": "session",
+    "jhipsterVersion": "3.9.1",
+    "baseName": "iFootball2",
+    "packageName": "com.ifootball",
+    "packageFolder": "com/ifootball",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
     "hibernateCache": "no",
-    "clusteredHttpSession": "no",
+    "clusteredHttpSession": false,
     "websocket": "spring-websocket",
-    "databaseType": "sql",
-    "devDatabaseType": "h2Memory",
-    "prodDatabaseType": "postgresql",
-    "searchEngine": "no",
-    "useSass": false,
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": false,
+    "messageBroker": false,
     "buildTool": "maven",
-    "frontendBuilder": "grunt",
-    "enableTranslation": true,
-    "enableSocialSignIn": false,
-    "rememberMeKey": "4010d9e9ebaa15166af6cfcb5e2410da35d04b6d",
+    "enableSocialSignIn": true,
+    "jwtSecretKey": "030c7c057f58ef69dfe9b6a9c74d4ad583967079",
+    "useSass": false,
+    "applicationType": "monolith",
     "testFrameworks": [
       "protractor"
+    ],
+    "jhiPrefix": "jhi",
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en",
+      "pl"
     ]
   }
 }

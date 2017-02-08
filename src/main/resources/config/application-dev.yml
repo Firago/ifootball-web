@@ -10,40 +10,31 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+
 spring:
     profiles:
         active: dev
+        include: swagger
     devtools:
         restart:
             enabled: true
         livereload:
-            enabled: false # we use Grunt + BrowserSync for livereload
-    datasource:
-        driver-class-name: org.h2.jdbcx.JdbcDataSource
-        url: jdbc:h2:mem:ifootball;DB_CLOSE_DELAY=-1
-        name:
-        username: iFootball
-        password:
-    h2:
-        console:
-            enabled: false
-    jpa:
-        database-platform: com.mobica.ifootball.domain.util.FixedH2Dialect
-        database: H2
-        show_sql: true
-        properties:
-            hibernate.cache.use_second_level_cache: false
-            hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: true
+            enabled: false # we use gulp + BrowserSync for livereload
+    jackson:
+        serialization.indent_output: true
+    data:
+        mongodb:
+            uri: mongodb://localhost:27017
+            database: iFootball2
     mail:
         host: localhost
+        port: 25
+        username:
+        password:
     messages:
         cache-seconds: 1
     thymeleaf:
         cache: false
-
-liquibase:
-    contexts: dev
 
 server:
     port: 8080
@@ -53,8 +44,14 @@ server:
 # ===================================================================
 
 jhipster:
+    security:
+        authentication:
+            jwt:
+                secret: my-secret-token-to-change-in-production
+                # Token is valid 24 hours
+                tokenValidityInSeconds: 86400
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: iFootball@localhost
+        from: iFootball2@localhost
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         spark:
@@ -65,4 +62,13 @@ jhipster:
             enabled: false
             host: localhost
             port: 2003
-            prefix: iFootball
+            prefix: iFootball2
+        logs: # Reports Dropwizard metrics in the logs
+            enabled: false
+            reportFrequency: 60 # in seconds
+    logging:
+        logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+            enabled: false
+            host: localhost
+            port: 5000
+            queueSize: 512

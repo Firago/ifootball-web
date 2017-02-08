@@ -1,13 +1,13 @@
 ######################
 # Project Specific
 ######################
-/src/main/webapp/dist
-/src/main/webapp/bower_components
+/target/www/**
 
 ######################
 # Node
 ######################
 /node/**
+/node_tmp/**
 /node_modules/**
 
 ######################
@@ -21,7 +21,6 @@
 *.pydevproject
 .project
 .metadata
-/bin/**
 /tmp/**
 /tmp/**/*
 *.tmp
@@ -55,6 +54,11 @@ local.properties
 *.ipr
 *.ids
 *.orig
+
+######################
+# Visual Studio Code
+######################
+.vscode/**
 
 ######################
 # Maven
@@ -127,3 +131,8 @@ Desktop.ini
 # Maven Wrapper
 ######################
 !.mvn/wrapper/maven-wrapper.jar
+
+######################
+# ESLint
+######################
+.eslintcache

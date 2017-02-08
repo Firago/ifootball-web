@@ -1,9 +1,8 @@
-mod = angular.module('infinite-scroll', [])
-
-mod.value('THROTTLE_MILLISECONDS', null)
-
-mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS', \
-                                  ($rootScope, $window, $interval, THROTTLE_MILLISECONDS) ->
+angular.module('infinite-scroll', [])
+  .value('THROTTLE_MILLISECONDS', null)
+  .directive 'infiniteScroll', [
+    '$rootScope', '$window', '$interval', 'THROTTLE_MILLISECONDS',
+($rootScope, $window, $interval, THROTTLE_MILLISECONDS) ->
   scope:
     infiniteScroll: '&'
     infiniteScrollContainer: '='
@@ -22,6 +21,7 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
     immediateCheck = true
     useDocumentBottom = false
     unregisterEventListener = null
+    checkInterval = false
 
     height = (elem) ->
       elem = elem[0] or elem
@@ -71,6 +71,7 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
           else
             scope.$apply(scope.infiniteScroll)
       else
+        if checkInterval then $interval.cancel checkInterval
         checkWhenEnabled = false
 
     # The optional THROTTLE_MILLISECONDS configuration value specifies
@@ -87,13 +88,11 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
         $interval.cancel(timeout)
         timeout = null
         func.call()
-        context = null
 
       return ->
         now = new Date().getTime()
         remaining = wait - (now - previous)
         if remaining <= 0
-          clearTimeout timeout
           $interval.cancel(timeout)
           timeout = null
           previous = now
@@ -108,6 +107,8 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
       if unregisterEventListener?
         unregisterEventListener()
         unregisterEventListener = null
+      if checkInterval
+        $interval.cancel checkInterval
 
     # infinite-scroll-distance specifies how close to the bottom of the page
     # the window is allowed to be before we trigger a new scroll. The value
@@ -172,7 +173,7 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
       if (not newContainer?) or newContainer.length == 0
         return
 
-      if newContainer instanceof HTMLElement
+      if newContainer.nodeType && newContainer.nodeType == 1
         newContainer = angular.element newContainer
       else if typeof newContainer.append == 'function'
         newContainer = angular.element newContainer[newContainer.length - 1]
@@ -182,7 +183,7 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
       if newContainer?
         changeContainer newContainer
       else
-        throw new Exception("invalid infinite-scroll-container attribute.")
+        throw new Error("invalid infinite-scroll-container attribute.")
 
     scope.$watch 'infiniteScrollContainer', handleInfiniteScrollContainer
     handleInfiniteScrollContainer(scope.infiniteScrollContainer or [])
@@ -198,8 +199,11 @@ mod.directive 'infiniteScroll', ['$rootScope', '$window', '$interval', 'THROTTLE
     if attrs.infiniteScrollImmediateCheck?
       immediateCheck = scope.$eval(attrs.infiniteScrollImmediateCheck)
 
-    $interval (->
+    checkInterval = $interval (->
       if immediateCheck
         handler()
-    ), 0, 1
+      $interval.cancel checkInterval
+    )
 ]
+if typeof module != "undefined" && typeof exports != "undefined" && module.exports == exports
+  module.exports = 'infinite-scroll'

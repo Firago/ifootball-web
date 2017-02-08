@@ -10,26 +10,17 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+
 spring:
-    datasource:
-        driver-class-name: org.h2.jdbcx.JdbcDataSource
-        url: jdbc:h2:mem:iFootball;DB_CLOSE_DELAY=-1
-        name:
-        username:
-        password:
-    jpa:
-        database-platform: com.mobica.ifootball.domain.util.FixedH2Dialect
-        database: H2
-        open-in-view: false
-        show_sql: true
-        hibernate:
-            ddl-auto: none
-            naming-strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
-        properties:
-            hibernate.cache.use_second_level_cache: false
-            hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: true
-            hibernate.hbm2ddl.auto: validate
+    application:
+        name: iFootball2
+    jackson:
+        serialization.write_dates_as_timestamps: false
+    data:
+        mongodb:
+            host: localhost
+            port: 27117
+            database: iFootball2
     mail:
         host: localhost
     mvc:
@@ -59,16 +50,20 @@ jhipster:
         maxPoolSize: 50
         queueCapacity: 10000
     security:
-        rememberme:
-            # security key (this key should be unique for your application, and kept secret)
-            key: 4010d9e9ebaa15166af6cfcb5e2410da35d04b6d
+        authentication:
+            jwt:
+                secret: 030c7c057f58ef69dfe9b6a9c74d4ad583967079
+                # Token is valid 24 hours
+                tokenValidityInSeconds: 86400
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
     swagger:
-        title: iFootball API
-        description: iFootball API documentation
+        title: iFootball2 API
+        description: iFootball2 API documentation
         version: 0.0.1
         termsOfServiceUrl:
-        contact:
+        contactName:
+        contactUrl:
+        contactEmail:
         license:
         licenseUrl:
